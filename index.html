@@ -319,75 +319,15 @@
 
       
         
-          
-            <p>本文记录 学习 swift 学习过程中，遇到的一些问题，以及相关知识点，仅作为学习记录，文中引用相关资料均已注明参考链接，如有侵权，请联系我删除。</p>
+          <p>本文记录 学习 swift 学习过程中，遇到的一些问题，以及相关知识点，仅作为学习记录，文中引用相关资料均已注明参考链接，如有侵权，请联系我删除。</p>
 <p>[toc]</p>
-<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h4 id="对let-和-var-的理解"><a href="#对let-和-var-的理解" class="headerlink" title="对let 和 var 的理解"></a>对let 和 var 的理解</h4><p><strong><em>let 和 var 的区别就是在于对象内存地址可不可以改变</em></strong><br><strong>let</strong> 代表不可变对象，即对象首地址不能发生变更，也就是说内存地址不能改变，但也可以修饰可变对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a: String = &quot;sb&quot;</span><br><span class="line"></span><br><span class="line">a = &quot;sbc&quot;    // 会报错误 ，因为let修饰的变量不能改变指针指向</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let array: NSMutableArray = NSMutableArray()</span><br><span class="line"></span><br><span class="line">array.add(&quot;123&quot;)  //不会报错，因为数组a 的指针没有重新指向</span><br></pre></td></tr></table></figure>
-
-<p><strong>var</strong> 代表可变对象，即内存地址可以发生改变，可以修饰指针重新指向的变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var b: String = &quot;sb&quot;</span><br><span class="line"></span><br><span class="line">b = &quot;sbc&quot; // 不会报错，因为var修饰的变量指针可以重新指向</span><br></pre></td></tr></table></figure>
-
-<h4 id="对-！和-？-的理解-参考链接"><a href="#对-！和-？-的理解-参考链接" class="headerlink" title="对 ！和 ？ 的理解 参考链接"></a>对 ！和 ？ 的理解 <a href="https://blog.csdn.net/Lu_Ca/article/details/80248800" target="_blank" rel="noopener">参考链接</a></h4><p>？其实就是swift的一种新的类型，这个类型是一个可选类型（optional）。这个标志表示我定义一个变量为可选类型的。例如 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let num:Int?</span><br></pre></td></tr></table></figure>
-
-<p>这个可选类型就是表示，我生明了一个类型如果有值就为Int类型的，如果没有值那么就是nil。所以说我并没有声明变量num为Int类型，而是可选类型的，可能是Int也可能是nil。</p>
-<p>当我对num显式赋值时</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let num:Int? = 3</span><br></pre></td></tr></table></figure>
-
-<p>那么num就是Int类型，当我没有对num显式赋值，那么num为nil类型</p>
-<p>如果想要操作一个optional类型的变量，需要先进行解包，然后才能操作，这时就用到了！</p>
-<p>！表示强解包，在使用的时候要注意，如果有值就会得到变量的值，如果为nil那么程序会crash</p>
-<p>例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个string的可选类型str，显式赋值</span><br><span class="line">var str: String? = &quot;Hello&quot;</span><br><span class="line">if str&#123;</span><br><span class="line">    let message = &quot;你好&quot; + str！</span><br><span class="line">    print(message)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为已经给str赋值为hello，所以if判断条件成立，然后给name强解包，得到hello</p>
-<p>同样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个string的可选类型str，但是没有显式赋值</span><br><span class="line">var str: String?</span><br><span class="line">let message = &quot;你好&quot; + str！</span><br><span class="line">print(message)</span><br></pre></td></tr></table></figure>
-
-<p>强解包程序会crash掉</p>
-<p>所以在使用！强解包的时候一定要确定解包对象不为nil，否则会引起程序崩溃</p>
-<h4 id="对-as？-和-as！的理解-参考链接"><a href="#对-as？-和-as！的理解-参考链接" class="headerlink" title="对 as？ 和 as！的理解 参考链接"></a>对 as？ 和 as！的理解 <a href="https://www.jianshu.com/p/e798cd9d3303" target="_blank" rel="noopener">参考链接</a></h4><ol>
-<li>as的使用场合<br> 从派生类转换为基类，向上转类型(upcasting) <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Animal&#123;&#125;</span><br><span class="line">class Dog:Animal&#123;&#125;</span><br><span class="line">let  cat = Dog()</span><br><span class="line">let dog = cat as Animal</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<pre><code>消除二义性，数值类型转换
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let num1 = 4 as Int</span><br><span class="line">let num2 = 5.09 as CGFloat</span><br></pre></td></tr></table></figure>
-
-
-switch语句中进行模式匹配
-如果不知道一个对象是什么类型，可以通过switch语法检测他的类型，并且尝试在不同类型下使用对应的类型进行相应的处理。
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">switch animal&#123;</span><br><span class="line">     case let dog as Dog:</span><br><span class="line">           print(&quot;如果是Dog类型对象，则做相应处理&quot;)</span><br><span class="line">     case let cat as Cat:</span><br><span class="line">           print(&quot;如果是Cat类型对象，则做相应处理&quot;)</span><br><span class="line">     default: break</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><ol start="2">
-<li><p>as？ 使用场合</p>
-<p> 向下转型(Downcasting)时使用,由于是强制类型转换，如果转换失败会报runtime运行错误</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Animal&#123;&#125;</span><br><span class="line">class Cat:Animal&#123;&#125;</span><br><span class="line">let animal:Animal = Cat()</span><br><span class="line">let cat = animal as! Cat</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>as！ 使用场合<br> as?和as!操作符的转换规则是一样的，只是as?在转换失败之后会返回nil对象，转换成功之后返回一个可选类型(optional)，需要我们拆包使用。<br>由于as?转换失败也不会报错，所以对于能够100%确定使用as!能够转换成功的，使用as!,否则使用as?</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let animal:Animal = Cat()</span><br><span class="line">if let cat = animal as? Cat&#123;</span><br><span class="line">   print(&quot;这里有猫&quot;)</span><br><span class="line">&#125;else&#123;</span><br><span class="line">  print(&quot;这里没有猫&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="语法记录"><a href="#语法记录" class="headerlink" title="语法记录"></a>语法记录</h3><h4 id="extension（Category）添加属性写法"><a href="#extension（Category）添加属性写法" class="headerlink" title="extension（Category）添加属性写法"></a>extension（Category）添加属性写法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">extension UIViewController&#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    var testString : String? &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return (objc_getAssociatedObject(self, &quot;testStringKey&quot;) as? String)</span><br><span class="line">        &#125;</span><br><span class="line">        set &#123;</span><br><span class="line">            objc_setAssociatedObject(self, &quot;testStringKey&quot;, newValue, .OBJC_ASSOCIATION_ASSIGN)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="懒加载写法"><a href="#懒加载写法" class="headerlink" title="懒加载写法"></a>懒加载写法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lazy var testView : UIView = &#123;</span><br><span class="line">        let view = UIView()</span><br><span class="line">        view.backgroundColor = .red</span><br><span class="line">        return view()</span><br><span class="line">    &#125;()</span><br></pre></td></tr></table></figure>
-
-<h4 id="get-set-方法"><a href="#get-set-方法" class="headerlink" title="get set 方法"></a>get set 方法</h4><ol>
-<li><p>swift 中我们不能使用  _c 来表示 OC 中 @property 修饰的变量 c</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var x: CGFloat&#123;</span><br><span class="line">    set&#123;</span><br><span class="line">        x = newValue</span><br><span class="line">    &#125;</span><br><span class="line">    get&#123;</span><br><span class="line">        return  23.1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>swift 5.0 中使用了willset 和 didSet 这连个特性 来见识属性的除初始化之外的 属性值变化，和 OC 比较，我们可以在didSet 里面执行一些改变UI的操作</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var newAge:String?&#123;</span><br><span class="line">       willSet&#123;</span><br><span class="line">           //</span><br><span class="line">           print(&quot;===========&quot;)</span><br><span class="line">       &#125;</span><br><span class="line">       didSet&#123;</span><br><span class="line">           print(&quot;did set &quot;+newAge!)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="自定义-DEBUG-logs-输出"><a href="#自定义-DEBUG-logs-输出" class="headerlink" title="自定义 DEBUG logs 输出"></a>自定义 DEBUG logs 输出</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func QLog&lt;T&gt;(_ message : T, fileName : String = #file, lineNum : Int = #line) &#123;</span><br><span class="line">    #if DEBUG</span><br><span class="line">    // 处理fileName</span><br><span class="line">    let file = (fileName as NSString).lastPathComponent</span><br><span class="line">    print(&quot;\(file):[\(lineNum)] \(message)&quot;)</span><br><span class="line">    #endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/10/swift学习笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
