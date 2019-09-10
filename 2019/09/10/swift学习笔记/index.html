@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="swift,">
+  <meta name="keywords" content="iOS,Swift,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="[toc] 知识点对let 和 var 的理解let 和 var 的区别就是在于对象内存地址可不可以改变let 代表不可变对象，即对象首地址不能发生变更，也就是说内存地址不能改变，但也可以修饰可变对象。 123let a: String = &amp;quot;sb&amp;quot;a = &amp;quot;sbc&amp;quot;    // 会报错误 ，因为let修饰的变量不能改变指针指向  123let array:">
-<meta name="keywords" content="swift">
+<meta name="description" content="本文记录 学习 swift 学习过程中，遇到的一些问题，以及相关知识点，仅作为学习记录，文中引用相关资料均已注明参考链接，如有侵权，请联系我删除。 [toc] 知识点对let 和 var 的理解let 和 var 的区别就是在于对象内存地址可不可以改变let 代表不可变对象，即对象首地址不能发生变更，也就是说内存地址不能改变，但也可以修饰可变对象。 123let a: String = &amp;quot">
+<meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习笔记">
+<meta property="og:title" content="Swift 学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/09/10/swift学习笔记/index.html">
 <meta property="og:site_name" content="十三">
-<meta property="og:description" content="[toc] 知识点对let 和 var 的理解let 和 var 的区别就是在于对象内存地址可不可以改变let 代表不可变对象，即对象首地址不能发生变更，也就是说内存地址不能改变，但也可以修饰可变对象。 123let a: String = &amp;quot;sb&amp;quot;a = &amp;quot;sbc&amp;quot;    // 会报错误 ，因为let修饰的变量不能改变指针指向  123let array:">
+<meta property="og:description" content="本文记录 学习 swift 学习过程中，遇到的一些问题，以及相关知识点，仅作为学习记录，文中引用相关资料均已注明参考链接，如有侵权，请联系我删除。 [toc] 知识点对let 和 var 的理解let 和 var 的区别就是在于对象内存地址可不可以改变let 代表不可变对象，即对象首地址不能发生变更，也就是说内存地址不能改变，但也可以修饰可变对象。 123let a: String = &amp;quot">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-10T07:55:17.351Z">
+<meta property="og:updated_time" content="2019-09-10T08:05:10.627Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习笔记">
-<meta name="twitter:description" content="[toc] 知识点对let 和 var 的理解let 和 var 的区别就是在于对象内存地址可不可以改变let 代表不可变对象，即对象首地址不能发生变更，也就是说内存地址不能改变，但也可以修饰可变对象。 123let a: String = &amp;quot;sb&amp;quot;a = &amp;quot;sbc&amp;quot;    // 会报错误 ，因为let修饰的变量不能改变指针指向  123let array:">
+<meta name="twitter:title" content="Swift 学习笔记">
+<meta name="twitter:description" content="本文记录 学习 swift 学习过程中，遇到的一些问题，以及相关知识点，仅作为学习记录，文中引用相关资料均已注明参考链接，如有侵权，请联系我删除。 [toc] 知识点对let 和 var 的理解let 和 var 的区别就是在于对象内存地址可不可以改变let 代表不可变对象，即对象首地址不能发生变更，也就是说内存地址不能改变，但也可以修饰可变对象。 123let a: String = &amp;quot">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>学习笔记 | 十三</title>
+  <title>Swift 学习笔记 | 十三</title>
   
 
 
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">Swift 学习笔记</h1>
         
 
         <div class="post-meta">
@@ -320,7 +320,8 @@
       
 
       
-        <p>[toc]</p>
+        <p>本文记录 学习 swift 学习过程中，遇到的一些问题，以及相关知识点，仅作为学习记录，文中引用相关资料均已注明参考链接，如有侵权，请联系我删除。</p>
+<p>[toc]</p>
 <h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><h4 id="对let-和-var-的理解"><a href="#对let-和-var-的理解" class="headerlink" title="对let 和 var 的理解"></a>对let 和 var 的理解</h4><p><strong><em>let 和 var 的区别就是在于对象内存地址可不可以改变</em></strong><br><strong>let</strong> 代表不可变对象，即对象首地址不能发生变更，也就是说内存地址不能改变，但也可以修饰可变对象。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a: String = &quot;sb&quot;</span><br><span class="line"></span><br><span class="line">a = &quot;sbc&quot;    // 会报错误 ，因为let修饰的变量不能改变指针指向</span><br></pre></td></tr></table></figure>
 
@@ -402,7 +403,7 @@ switch语句中进行模式匹配
       
         <div class="post-tags">
           
-            <a href="/tags/swift/" rel="tag"># swift</a>
+            <a href="/tags/iOS-Swift/" rel="tag"># iOS,Swift</a>
           
         </div>
       
