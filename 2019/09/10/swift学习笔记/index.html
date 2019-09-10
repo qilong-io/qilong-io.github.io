@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="十三">
 <meta property="og:description" content="本文记录 学习 swift 学习过程中，遇到的一些问题，以及相关知识点，仅作为学习记录，文中引用相关资料均已注明参考链接，如有侵权，请联系我删除。 [toc]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-10T08:16:27.770Z">
+<meta property="og:updated_time" content="2019-09-10T08:23:50.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 学习笔记">
 <meta name="twitter:description" content="本文记录 学习 swift 学习过程中，遇到的一些问题，以及相关知识点，仅作为学习记录，文中引用相关资料均已注明参考链接，如有侵权，请联系我删除。 [toc]">
@@ -351,29 +351,28 @@
 <p>强解包程序会crash掉</p>
 <p>所以在使用！强解包的时候一定要确定解包对象不为nil，否则会引起程序崩溃</p>
 <h4 id="对-as？-和-as！的理解-参考链接"><a href="#对-as？-和-as！的理解-参考链接" class="headerlink" title="对 as？ 和 as！的理解 参考链接"></a>对 as？ 和 as！的理解 <a href="https://www.jianshu.com/p/e798cd9d3303" target="_blank" rel="noopener">参考链接</a></h4><ol>
-<li>as的使用场合<br> 从派生类转换为基类，向上转类型(upcasting) <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Animal&#123;&#125;</span><br><span class="line">class Dog:Animal&#123;&#125;</span><br><span class="line">let  cat = Dog()</span><br><span class="line">let dog = cat as Animal</span><br></pre></td></tr></table></figure>
+<li><p>as的使用场合<br> 从派生类转换为基类，向上转类型(upcasting)</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Animal&#123;&#125;</span><br><span class="line">class Dog:Animal&#123;&#125;</span><br><span class="line">let  cat = Dog()</span><br><span class="line">let dog = cat as Animal</span><br></pre></td></tr></table></figure>
+
+<p> 消除二义性，数值类型转换</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let num1 = 4 as Int</span><br><span class="line">let num2 = 5.09 as CGFloat</span><br></pre></td></tr></table></figure>
+
+<p> switch语句中进行模式匹配<br> 如果不知道一个对象是什么类型，可以通过switch语法检测他的类型，并且尝试在不同类型下使用对应的类型进行相应的处理。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">switch animal&#123;</span><br><span class="line">     case let dog as Dog:</span><br><span class="line">           print(&quot;如果是Dog类型对象，则做相应处理&quot;)</span><br><span class="line">     case let cat as Cat:</span><br><span class="line">           print(&quot;如果是Cat类型对象，则做相应处理&quot;)</span><br><span class="line">     default: break</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 </li>
 </ol>
-<pre><code>消除二义性，数值类型转换
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let num1 = 4 as Int</span><br><span class="line">let num2 = 5.09 as CGFloat</span><br></pre></td></tr></table></figure>
-
-
-switch语句中进行模式匹配
-如果不知道一个对象是什么类型，可以通过switch语法检测他的类型，并且尝试在不同类型下使用对应的类型进行相应的处理。
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">switch animal&#123;</span><br><span class="line">     case let dog as Dog:</span><br><span class="line">           print(&quot;如果是Dog类型对象，则做相应处理&quot;)</span><br><span class="line">     case let cat as Cat:</span><br><span class="line">           print(&quot;如果是Cat类型对象，则做相应处理&quot;)</span><br><span class="line">     default: break</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><ol start="2">
-<li><p>as？ 使用场合</p>
-<p> 向下转型(Downcasting)时使用,由于是强制类型转换，如果转换失败会报runtime运行错误</p>
+<ol start="2">
+<li><p>as？ 使用场合<br> 向下转型(Downcasting)时使用,由于是强制类型转换，如果转换失败会报runtime运行错误</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Animal&#123;&#125;</span><br><span class="line">class Cat:Animal&#123;&#125;</span><br><span class="line">let animal:Animal = Cat()</span><br><span class="line">let cat = animal as! Cat</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>as！ 使用场合</p>
+<li><p>as！ 使用场合<br> as?和as!操作符的转换规则是一样的，只是as?在转换失败之后会返回nil对象，转换成功之后返回一个可选类型(optional)，需要我们拆包使用。<br>由于as?转换失败也不会报错，所以对于能够100%确定使用as!能够转换成功的，使用as!,否则使用as?</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let animal:Animal = Cat()</span><br><span class="line">if let cat = animal as? Cat&#123;</span><br><span class="line">   print(&quot;这里有猫&quot;)</span><br><span class="line">&#125;else&#123;</span><br><span class="line">  print(&quot;这里没有猫&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
-<pre><code>as?和as!操作符的转换规则是一样的，只是as?在转换失败之后会返回nil对象，转换成功之后返回一个可选类型(optional)，需要我们拆包使用。</code></pre><p>由于as?转换失败也不会报错，所以对于能够100%确定使用as!能够转换成功的，使用as!,否则使用as?</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let animal:Animal = Cat()</span><br><span class="line">if let cat = animal as? Cat&#123;</span><br><span class="line">   print(&quot;这里有猫&quot;)</span><br><span class="line">&#125;else&#123;</span><br><span class="line">  print(&quot;这里没有猫&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><h3 id="语法记录"><a href="#语法记录" class="headerlink" title="语法记录"></a>语法记录</h3><h4 id="extension（Category）添加属性写法"><a href="#extension（Category）添加属性写法" class="headerlink" title="extension（Category）添加属性写法"></a>extension（Category）添加属性写法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">extension UIViewController&#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    var testString : String? &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return (objc_getAssociatedObject(self, &quot;testStringKey&quot;) as? String)</span><br><span class="line">        &#125;</span><br><span class="line">        set &#123;</span><br><span class="line">            objc_setAssociatedObject(self, &quot;testStringKey&quot;, newValue, .OBJC_ASSOCIATION_ASSIGN)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="语法记录"><a href="#语法记录" class="headerlink" title="语法记录"></a>语法记录</h3><h4 id="extension（Category）添加属性写法"><a href="#extension（Category）添加属性写法" class="headerlink" title="extension（Category）添加属性写法"></a>extension（Category）添加属性写法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">extension UIViewController&#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    var testString : String? &#123;</span><br><span class="line">        get &#123;</span><br><span class="line">            return (objc_getAssociatedObject(self, &quot;testStringKey&quot;) as? String)</span><br><span class="line">        &#125;</span><br><span class="line">        set &#123;</span><br><span class="line">            objc_setAssociatedObject(self, &quot;testStringKey&quot;, newValue, .OBJC_ASSOCIATION_ASSIGN)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="懒加载写法"><a href="#懒加载写法" class="headerlink" title="懒加载写法"></a>懒加载写法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lazy var testView : UIView = &#123;</span><br><span class="line">        let view = UIView()</span><br><span class="line">        view.backgroundColor = .red</span><br><span class="line">        return view()</span><br><span class="line">    &#125;()</span><br></pre></td></tr></table></figure>
 
